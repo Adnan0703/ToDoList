@@ -5,26 +5,34 @@ App::uses('ToDoListAppController', 'ToDoList.Controller');
  *
  * @property Todo $Todo
  */
-class TodosController extends ToDoListAppController {
+class TodosController extends ToDoListAppController
+{
+	public $paginate = array(
+		'order' => array(
+			'Todo.list' => 'desc'
+		),
+	);
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
+	public function index()
+	{
 		$this->Todo->recursive = 0;
 		$this->set('todos', $this->paginate());
 	}
 
-/**
- * view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
+	/**
+	 * view method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function view($id = null)
+	{
 		$this->Todo->id = $id;
 		if (!$this->Todo->exists()) {
 			throw new NotFoundException(__('Invalid todo'));
@@ -32,12 +40,13 @@ class TodosController extends ToDoListAppController {
 		$this->set('todo', $this->Todo->read(null, $id));
 	}
 
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
+	public function add()
+	{
 		if ($this->request->is('post')) {
 			$this->Todo->create();
 			if ($this->Todo->save($this->request->data)) {
@@ -49,14 +58,15 @@ class TodosController extends ToDoListAppController {
 		}
 	}
 
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
+	/**
+	 * edit method
+	 *
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function edit($id = null)
+	{
 		$this->Todo->id = $id;
 		if (!$this->Todo->exists()) {
 			throw new NotFoundException(__('Invalid todo'));
@@ -73,15 +83,16 @@ class TodosController extends ToDoListAppController {
 		}
 	}
 
-/**
- * delete method
- *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
+	/**
+	 * delete method
+	 *
+	 * @throws MethodNotAllowedException
+	 * @throws NotFoundException
+	 * @param string $id
+	 * @return void
+	 */
+	public function delete($id = null)
+	{
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
