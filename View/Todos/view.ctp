@@ -21,6 +21,11 @@
 			<?php echo h($todo['Todo']['completed']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Due'); ?></dt>
+		<dd>
+			<?php echo h($todo['Todo']['due']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($todo['Todo']['created']); ?>

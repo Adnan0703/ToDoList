@@ -2,23 +2,21 @@
 	<h2><?php echo __('Todos'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('list'); ?></th>
 			<th><?php echo $this->Paginator->sort('note'); ?></th>
 			<th><?php echo $this->Paginator->sort('completed'); ?></th>
+			<th><?php echo $this->Paginator->sort('due'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php
 	foreach ($todos as $todo): ?>
 	<tr>
-		<td><?php echo h($todo['Todo']['id']); ?>&nbsp;</td>
 		<td><?php echo h($todo['Todo']['list']); ?>&nbsp;</td>
 		<td><?php echo h($todo['Todo']['note']); ?>&nbsp;</td>
 		<td><?php echo h($todo['Todo']['completed']); ?>&nbsp;</td>
+		<td><?php echo h($todo['Todo']['due']); ?>&nbsp;</td>
 		<td><?php echo h($todo['Todo']['created']); ?>&nbsp;</td>
-		<td><?php echo h($todo['Todo']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $todo['Todo']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $todo['Todo']['id'])); ?>

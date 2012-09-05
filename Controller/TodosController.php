@@ -8,6 +8,9 @@ App::uses('ToDoListAppController', 'ToDoList.Controller');
 class TodosController extends ToDoListAppController
 {
 	public $paginate = array(
+		'conditions' => array(
+			'Todo.completed' => 0,
+		),
 		'order' => array(
 			'Todo.list' => 'desc'
 		),
@@ -48,6 +51,7 @@ class TodosController extends ToDoListAppController
 	public function add()
 	{
 		if ($this->request->is('post')) {
+			$this->request->data['Todo']['due'] = date('Y-m-d H:i:s', strtotime($this->request->data['Todo']['due']));
 			$this->Todo->create();
 			if ($this->Todo->save($this->request->data)) {
 				$this->Session->setFlash(__('The todo has been saved'));
@@ -72,6 +76,7 @@ class TodosController extends ToDoListAppController
 			throw new NotFoundException(__('Invalid todo'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->request->data['Todo']['due'] = date('Y-m-d H:i:s', strtotime($this->request->data['Todo']['due']));
 			if ($this->Todo->save($this->request->data)) {
 				$this->Session->setFlash(__('The todo has been saved'));
 				$this->redirect(array('action' => 'index'));
@@ -107,4 +112,5 @@ class TodosController extends ToDoListAppController
 		$this->Session->setFlash(__('Todo was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

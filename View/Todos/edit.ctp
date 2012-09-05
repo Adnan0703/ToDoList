@@ -1,3 +1,6 @@
+<?php
+	$due = date('Y/m/d', strtotime($this->data['Todo']['due']));
+?>
 <div class="todos form">
 <?php echo $this->Form->create('Todo'); ?>
 	<fieldset>
@@ -7,7 +10,12 @@
 		echo $this->Form->input('list');
 		echo $this->Form->input('note');
 		echo $this->Form->input('completed');
+		//echo $this->Form->input('due');
 	?>
+		<div class="input">
+			<label for="data[Todo][due]">Due On</label>
+			<input name="data[Todo][due]" type="text" class="datetime" value="<?php echo $due ?>" />
+		</div>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
 </div>
